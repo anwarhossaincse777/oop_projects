@@ -39,12 +39,37 @@ $auth=new Auth();
 
     }
 
-    else{
 
 
-         print_r("wrong");
+    //login code here
 
-    }
+
+
+        if (isset($_POST['action']) && $_POST['action']=='login'){
+
+                 $email=$_POST['email'];
+                 $password=$_POST['password'];
+
+
+             $result=$auth->login($email);
+
+                 if ($result->num_rows==1){
+
+                  $row=$result->fetch_assoc();
+
+                  password_verify($password,$row['password']);
+                 }
+                 else{
+
+                     echo $auth->showMessage('warning','something went wrong');
+
+
+                 }
+
+        }
+
+
+
 
 
 ?>

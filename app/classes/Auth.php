@@ -23,4 +23,12 @@ class Auth extends config
 
             }
 
+
+
+            public function login($email){
+
+               return  $result=$this->conn->query("SELECT email,password,status FROM users where email='$email'");
+
+            }
+
 }

@@ -25,6 +25,9 @@
 
                     <h2 class="text-center text-primary font-weight-bold">Login to Your Account</h2>
                     <hr class="my-3">
+
+                    <div id="loginError"></div>
+
                     <form action="" method="post" id="login-form" enctype="multipart/form-data">
                         <div class="input-group input-group-lg form-group">
                             <div class="input-group-prepend">
@@ -32,7 +35,7 @@
                                     <i class="fas fa-envelope"></i>
                                     </span>
                             </div>
-                            <input type="email" class="form-control" name="email" id="email"
+                            <input type="email" class="form-control is-invalid" name="email" id="email"
                                    placeholder="Enter Your Email">
 
                         </div>
@@ -43,7 +46,7 @@
                                     <i class="fas fa-key"></i>
                                     </span>
                             </div>
-                            <input type="password" class="form-control" id="password" name="password"
+                            <input type="password" class="form-control is-invalid" id="password" name="password"
                                    placeholder="Enter Your Password">
 
                         </div>
@@ -336,7 +339,7 @@
 
 
 
-        //validation
+        //validation for use registration
 
         $('#registerUser').click(function (e) {
 
@@ -419,6 +422,8 @@
 
                 }, 1000)
 
+
+
             }
 
 
@@ -426,19 +431,72 @@
 
 
 
-            $("#loginBtn").click(function (){
 
-                 $('#login-form')
+        //login validation
+
+        $('#loginBtn').click(function (e) {
+
+            if ($('#login-form')[0].checkValidity()) {
+
+                e.preventDefault();
+                $('#loginBtn').val("Loading....").attr('disabled', true);
 
 
-            })
+                if ($("#email").val() === '') {
+
+                    $("#email").addClass("is-invalid");
+                } else {
+
+                    $("#email").removeClass("is-invalid");
+                }
+
+
+                if ($("#password").val() === '') {
+
+                    $("#password").addClass("is-invalid");
+                } else {
+
+                    $("#password").removeClass("is-invalid");
+                }
+
+
+                    if ($("#email").val() !=='' && $("#password").val() !=='') {
+
+                        $('#loginBtn').val("log In").attr('disabled', false);
+
+                        $.ajax({
+                            url:'action.php',
+                            method:'POST',
+                            data:$("#login-form").serialize() + '&action=login',
+                            success:function (response){
+
+                                if (response=='0k'){
+
+                                     window.location='index.php';
+
+                                }else {
+
+
+                                    $('#loginError').html(response);
+                                }
+
+                            }
+
+                        })
+
+                    }
 
 
 
+            }
 
 
+        });
 
-    })
+
+        });
+
+
 
 
 </script>
