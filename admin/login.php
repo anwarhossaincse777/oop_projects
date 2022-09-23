@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="Sing In" id="showSignInForm" class="btn-block btn-primary">
+                            <input type="submit" value="Sing In" id="loginBtn" class="btn-block btn-primary">
 
                         </div>
 
@@ -102,7 +102,13 @@
             <div class="card p-4">
 
                 <h2 class="text-center text-primary font-weight-bold">Create New Account</h2>
+
                 <hr class="my-3">
+
+                <div id="registerError">
+
+                </div>
+
                 <form action="" method="post" id="register-form" enctype="multipart/form-data">
 
 
@@ -328,6 +334,8 @@
         });
 
 
+
+
         //validation
 
         $('#registerUser').click(function (e) {
@@ -380,10 +388,17 @@
                             $.ajax({
                                 url:'action.php',
                                 method:'POST',
-                                data:$("#register-form").serialize() + '&action==register',
+                                data:$("#register-form").serialize() + '&action=register',
                                 success:function (response){
+                                    if(response==='ok'){
 
-                                    console.log(response);
+                                        window.location='index.php';
+                                    }
+                                    else{
+
+                                        $('#registerError').html(response);
+
+                                    }
 
                                 }
 
@@ -408,6 +423,19 @@
 
 
         });
+
+
+
+            $("#loginBtn").click(function (){
+
+                 $('#login-form')
+
+
+            })
+
+
+
+
 
 
     })

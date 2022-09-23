@@ -1,0 +1,22 @@
+{
+  "name": "vendor_name/oop_project",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "SUMON",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  },
+  "require-dev": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\":"app"
+    }
+  }
+}
